@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Updating the user</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<div style="width: 100vw; height: 100vh;" class="d-flex justify-content-center align-items-center">
+    <div style="width: 40%; height: 50%;" class="d-flex flex-column justify-content-center align-items-center">
+        <div>
+            <p style="display: none" class="user-city" th:text = "${user.city}">
+        </div>
+        <form class="flex" th:action="@{/users/save}" method = "post" th:modelAttribute = "user">
+            <div>
+                <input type="hidden" name="id" th:value = "${user.id}">
+            </div>
+            <div>
+                <input type="hidden" name="dateOfCreation" th:value = "${user.dateOfCreation}">
+            </div>
+            <div class="form-group">
+                name <br> <input style="width: 100%" required type="text" name="name" th:value = "${user.name}">
+            </div>
+            <div class="form-group">
+                surname <br> <input style="width: 100%" required type="text" name="surname" th:value = "${user.surname}">
+            </div>
+            <div class="form-group">
+                patronymic <br> <input style="width: 100%" required type="text" name="otchestvo" th:value = "${user.otchestvo}">
+            </div>
+            <div>
+                country
+            </div>
+            <div class="form-group">
+                <select name="countryId" class="countrySelect" onchange="updateCitiesList()">
+                    <option th:each="country : ${countryList}" th:value="${country.id}" th:text="${country.name}"
+                            th:selected="${country==user.country}"></option>
+                </select>
+            </div>
+            <div>
+                city
+            </div>
+            <div class="form-group">
+                <select name="cityId" class="city-selection"></select>
+            </div>
+            <div class="form-group">
+                email <br> <input required style="width: 100%" type="text" name="email" th:value = "${user.email}">
+            </div>
+            <div class="form-group d-flex justify-content-center">
+                <input type="submit" value="Save" class="btn btn-success">
+            </div>
+            <div class="form-group d-flex justify-content-center" th:if="${error_message != null}">
+                Error: <p th:text="${error_message}"></p>
+            </div>
+            <ul>
+                <li th:each="err : ${#fields.errors('user.*')}" th:text="${err}" />
+            </ul>
+        </form>
+        <div class="d-flex justify-content-center">
+            <a href="/users" class="btn btn-dark">Back</a>
+        </div>
+    </div>
+</div>
+<script>
+
+    function updateCitiesList() {
+        const countrySelect = document.querySelector(".countrySelect")
+        const countryId = countrySelect.value
+        const citySelect = document.querySelector(".city-selection")
+        const city = document.querySelector(".user-city").textContent
+        console.log(city)
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/api/country/" + countryId + "/getCitiesByCountry",
+            success: function (result) {
+                while (citySelect.hasChildNodes()) {
+                    citySelect.firstChild.remove()
+                }
+                let i
+                for (i of result) {
+                    $('.city-selection').append("<option class='city-selection-child' value=\"" + i.id + "\">"+i.name+"</option>")
+                }
+                let options = document.getElementsByClassName('city-selection-child')
+                let iter = 0
+                while (iter < options.length){
+                    if(options[iter].textContent === city){
+                        options[iter].setAttribute('selected', 'selected')
+                        return
+                    }
+                    iter++
+                }
+            }
+        });
+    }
+    $(document).ready(function(){
+        updateCitiesList()
+    })
+</script>
+</body>
+</html>
