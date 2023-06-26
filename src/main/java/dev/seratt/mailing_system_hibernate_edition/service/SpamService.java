@@ -1,7 +1,7 @@
-package dev.seratt.mailing_system_main.service;
+package dev.seratt.mailing_system_hibernate_edition.service;
 
-import dev.seratt.mailing_system_main.entity.Group;
-import dev.seratt.mailing_system_main.entity.Spam;
+import dev.seratt.mailing_system_hibernate_edition.entity.Group;
+import dev.seratt.mailing_system_hibernate_edition.entity.Spam;
 
 import java.util.List;
 import java.util.Set;

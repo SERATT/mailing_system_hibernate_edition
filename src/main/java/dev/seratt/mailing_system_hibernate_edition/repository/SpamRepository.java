@@ -1,4 +1,4 @@
-package dev.seratt.mailing_system_hibernate_edition.dao;
+package dev.seratt.mailing_system_hibernate_edition.repository;
 
 import dev.seratt.mailing_system_hibernate_edition.entity.Group;
 import dev.seratt.mailing_system_hibernate_edition.entity.Spam;

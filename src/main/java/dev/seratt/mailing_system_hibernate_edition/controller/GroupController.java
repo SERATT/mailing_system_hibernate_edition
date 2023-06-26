@@ -1,9 +1,9 @@
-package dev.seratt.mailing_system_main.controller;
+package dev.seratt.mailing_system_hibernate_edition.controller;
 
-import dev.seratt.mailing_system_main.entity.Group;
-import dev.seratt.mailing_system_main.service.GroupService;
-import dev.seratt.mailing_system_main.service.SpamService;
-import dev.seratt.mailing_system_main.service.UserService;
+import dev.seratt.mailing_system_hibernate_edition.entity.Group;
+import dev.seratt.mailing_system_hibernate_edition.service.GroupService;
+import dev.seratt.mailing_system_hibernate_edition.service.SpamService;
+import dev.seratt.mailing_system_hibernate_edition.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 @Controller

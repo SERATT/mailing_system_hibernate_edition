@@ -14,7 +14,6 @@
           <form class="form" th:action="@{/spam/save}" method = "post" th:modelAttribute="spam">
               <input type="hidden" name="id" th:value="${spam.id}">
               <input type="hidden" name="sendDate" th:value="${spam.sendDate}">
-              <input type="hidden" name="group" th:value="null">
               <div class="form-group">
                   theme <br>
                   <input style="width: 100%" type="text" name="letterTheme" th:value="${spam.letterTheme}">

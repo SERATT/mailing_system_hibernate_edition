@@ -1,11 +1,10 @@
-package dev.seratt.mailing_system_main.service;
+package dev.seratt.mailing_system_hibernate_edition.service;
 
 
-import dev.seratt.mailing_system_main.entity.Group;
-import dev.seratt.mailing_system_main.entity.User;
+import dev.seratt.mailing_system_hibernate_edition.entity.Group;
+import dev.seratt.mailing_system_hibernate_edition.entity.User;
 
 import java.util.List;
-import java.util.Set;
 
 public interface GroupService {
     public List<Group> getAllGroups();
@@ -16,12 +15,12 @@ public interface GroupService {
 
     public void deleteGroup(int id);
 
-    public Set<Group> search(String searchText);
-    Group save(Group group);
+    public List<Group> search(String searchText);
+    public void save(Group group);
 
-    public List<Group> getGroupsByUsersContaining(User user);
+    public List<Group> getGroupsByUsersContaining(User userEntity);
 
-    public void addUserToGroup(User user, Group group);
+    public void addUserToGroup(User userEntity, Group group);
 
-    public void removeUserFromGroup(User user, Group group);
+    public void removeUserFromGroup(User userEntity, Group group);
 }

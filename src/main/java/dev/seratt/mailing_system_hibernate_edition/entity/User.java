@@ -1,4 +1,4 @@
-package dev.seratt.mailing_system_main.entity;
+package dev.seratt.mailing_system_hibernate_edition.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
@@ -54,6 +53,9 @@ public class User {
 
     @Column(name = "date_of_creation")
     private Timestamp dateOfCreation;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "users", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -145,14 +147,13 @@ public class User {
         return groups;
     }
 
-    public void setGroups(Set<Group> groups) {
-        this.groups = groups;
+    public void setGroups(Set<Group> groupEntities) {
+        this.groups = groupEntities;
     }
 
     @Override
     public String toString() {
-        return "User: " +
-                "id=" + id +
-                ", email=" + email;
+        return "User: " + name + " " + surname + " " + otchestvo +
+                " Email:" + email;
     }
 }

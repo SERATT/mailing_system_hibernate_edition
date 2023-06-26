@@ -1,13 +1,12 @@
-package dev.seratt.mailing_system_main.controller;
+package dev.seratt.mailing_system_hibernate_edition.controller;
 
-import dev.seratt.mailing_system_main.entity.*;
-import dev.seratt.mailing_system_main.service.*;
+import dev.seratt.mailing_system_hibernate_edition.entity.*;
+import dev.seratt.mailing_system_hibernate_edition.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -38,11 +37,11 @@ public class MainController {
 
     @GetMapping("/searchUsers")
     public String findUsersBySearch(@RequestParam("searchText") String searchText,
-                                    Model model, HttpServletRequest request){
+                                    Model model){
         if(searchText.isEmpty()){
             return "redirect:/users";
         }
-        Set<User> usersList = userService.search(searchText);
+        List<User> usersList = userService.search(searchText);
         model.addAttribute("usersList", usersList);
         return "users-page";
     }
@@ -53,7 +52,7 @@ public class MainController {
         if(searchText.isEmpty()){
             return "redirect:" + request.getHeader("Referer");
         }
-        Set<User> usersList = userService.search(searchText);
+        List<User> usersList = userService.search(searchText);
         model.addAttribute("usersList", usersList);
         model.addAttribute("groupId", groupId);
         return "choose-user";
@@ -65,7 +64,7 @@ public class MainController {
         if(searchText.isEmpty()){
             return "redirect:" + request.getHeader("Referer");
         }
-        Set<Group> groupsList = groupService.search(searchText);
+        List<Group> groupsList = groupService.search(searchText);
         model.addAttribute("groupsList", groupsList);
         return "choose-group";
     }
@@ -88,7 +87,7 @@ public class MainController {
         if(searchText.isEmpty()){
             return "redirect:/groups";
         }
-        Set<Group> groupsList = groupService.search(searchText);
+        List<Group> groupsList = groupService.search(searchText);
         model.addAttribute("groupsList", groupsList);
         return "groups-page";
     }

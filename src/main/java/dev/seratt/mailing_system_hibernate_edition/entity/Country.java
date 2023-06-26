@@ -1,4 +1,4 @@
-package dev.seratt.mailing_system_main.entity;
+package dev.seratt.mailing_system_hibernate_edition.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

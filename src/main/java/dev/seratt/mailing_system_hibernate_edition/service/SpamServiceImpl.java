@@ -1,7 +1,7 @@
-package dev.seratt.mailing_system_main.service;
+package dev.seratt.mailing_system_hibernate_edition.service;
 
-import dev.seratt.mailing_system_main.entity.*;
-import dev.seratt.mailing_system_main.repository.SpamRepository;
+import dev.seratt.mailing_system_hibernate_edition.entity.*;
+import dev.seratt.mailing_system_hibernate_edition.repository.SpamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

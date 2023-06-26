@@ -1,8 +1,8 @@
 package dev.seratt.mailing_system_hibernate_edition.form;
 
 
-import dev.seratt.mailing_system_main.entity.City;
-import dev.seratt.mailing_system_main.entity.Country;
+import dev.seratt.mailing_system_hibernate_edition.entity.City;
+import dev.seratt.mailing_system_hibernate_edition.entity.Country;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

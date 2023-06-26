@@ -1,49 +1,47 @@
-package dev.seratt.mailing_system_main.service;
+package dev.seratt.mailing_system_hibernate_edition.service;
 
-import dev.seratt.mailing_system_main.entity.User;
-import dev.seratt.mailing_system_main.repository.UserRepository;
+import dev.seratt.mailing_system_hibernate_edition.entity.User;
+import dev.seratt.mailing_system_hibernate_edition.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserDao userDao;
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return userDao.findAll();
     }
 
     @Override
-    public void saveUser(User user) {
-        userRepository.save(user);
+    public void saveUser(User userEntity) {
+        userDao.save(userEntity);
     }
 
     @Override
     public User getUser(int id) {
-        return userRepository.findById(id);
+        return userDao.findById(id);
     }
 
     @Override
     public void deleteUser(int id) {
-        userRepository.deleteById(id);
+        userDao.deleteById(id);
     }
 
     @Override
-    public Set<User> search(String searchText){
-        return userRepository
-                .findUsersByNameContainingIgnoreCaseOrSurnameContainingIgnoreCaseOrOtchestvoContainingIgnoreCaseOrEmailContainingIgnoreCase(
-                    searchText, searchText, searchText, searchText
-                );
+    public List<User> search(String searchText){
+        return userDao.search(searchText);
     }
 
     @Override
     public boolean checkEmailUniqueness(String email) {
-        return userRepository.findUserByEmail(email) == null;
+        return userDao.findUserByEmail(email) == null;
     }
 }

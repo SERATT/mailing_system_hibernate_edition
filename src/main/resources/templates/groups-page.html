@@ -31,7 +31,7 @@
     <th>title</th>
     <th>description</th>
     <th>date of creation</th>
-    <th>users</th>
+    <th>userEntities</th>
     <th>actions</th>
   </tr>
   </thead>
@@ -74,7 +74,7 @@
       <br>
       <form th:action="@{groups/addUser}" method="get">
         <input type="hidden" name="groupId"  th:value = "${group.id}">
-        <input type="hidden" name="userId"  placeholder="Type id of user you want to add">
+        <input type="hidden" name="userId"  placeholder="Type id of userEntity you want to add">
         <input type="submit" value="Add User" class="btn btn-success">
       </form>
       <br>

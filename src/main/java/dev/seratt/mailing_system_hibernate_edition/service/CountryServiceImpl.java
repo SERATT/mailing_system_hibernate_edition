@@ -1,7 +1,7 @@
-package dev.seratt.mailing_system_main.service;
+package dev.seratt.mailing_system_hibernate_edition.service;
 
-import dev.seratt.mailing_system_main.entity.Country;
-import dev.seratt.mailing_system_main.repository.CountryRepository;
+import dev.seratt.mailing_system_hibernate_edition.entity.Country;
+import dev.seratt.mailing_system_hibernate_edition.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

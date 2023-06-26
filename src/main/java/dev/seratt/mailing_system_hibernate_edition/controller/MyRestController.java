@@ -1,8 +1,8 @@
-package dev.seratt.mailing_system_main.controller;
+package dev.seratt.mailing_system_hibernate_edition.controller;
 
-import dev.seratt.mailing_system_main.entity.City;
-import dev.seratt.mailing_system_main.service.CityService;
-import dev.seratt.mailing_system_main.service.CountryService;
+import dev.seratt.mailing_system_hibernate_edition.entity.City;
+import dev.seratt.mailing_system_hibernate_edition.service.CityService;
+import dev.seratt.mailing_system_hibernate_edition.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +18,6 @@ public class MyRestController {
     CountryService countryService;
     @GetMapping("/api/country/{countryId}/getCitiesByCountry")
     public Set<City> getCitiesListByCountry(@PathVariable("countryId") int countryId) {
-        return cityService.getAllCitiesByCountry(
-                countryService.findById(countryId)
-        );
+        return cityService.getAllCitiesByCountryId(countryId);
     }
 }

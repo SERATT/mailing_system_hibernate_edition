@@ -1,66 +1,65 @@
 package dev.seratt.mailing_system_hibernate_edition.service;
 
-import dev.seratt.mailing_system_main.entity.Group;
-import dev.seratt.mailing_system_main.entity.User;
-import dev.seratt.mailing_system_main.repository.GroupRepository;
+import dev.seratt.mailing_system_hibernate_edition.entity.Group;
+import dev.seratt.mailing_system_hibernate_edition.entity.User;
+import dev.seratt.mailing_system_hibernate_edition.dao.GroupDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
+@Transactional
 public class GroupServiceImpl implements GroupService {
 
     @Autowired
-    private GroupRepository groupRepository;
+    private GroupDao groupDao;
 
     @Override
     public List<Group> getAllGroups() {
-        return groupRepository.findAll();
+        return groupDao.findAll();
     }
 
     @Override
     public void saveGroup(Group group) {
-        groupRepository.save(group);
+        groupDao.save(group);
     }
 
     @Override
     public Group getGroup(int id) {
-        return groupRepository.findById(id);
+        return groupDao.findById(id);
     }
 
     @Override
     public void deleteGroup(int id) {
-        groupRepository.deleteById(id);
+        groupDao.deleteById(id);
     }
 
     @Override
-    public Set<Group> search(String searchText) {
-        return groupRepository.
-                findGroupsByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase
-                        (searchText, searchText);
+    public List<Group> search(String searchText) {
+        return groupDao.search(searchText);
     }
 
     @Override
-    public Group save(Group group) {
-        return groupRepository.save(group);
+    public void save(Group group) {
+        groupDao.save(group);
     }
 
     @Override
-    public List<Group> getGroupsByUsersContaining(User user) {
-        return groupRepository.findGroupsByUsersContaining(user);
+    public List<Group> getGroupsByUsersContaining(User userEntity) {
+        return groupDao.findGroupsByUsersContaining(userEntity);
     }
 
     @Override
-    public void addUserToGroup(User user, Group group) {
-        group.addUser(user);
+    public void addUserToGroup(User userEntity, Group group) {
+        group.addUser(userEntity);
         save(group);
     }
 
     @Override
-    public void removeUserFromGroup(User user, Group group) {
-        group.removeUser(user);
+    public void removeUserFromGroup(User userEntity, Group group) {
+        group.removeUser(userEntity);
         save(group);
     }
 }
