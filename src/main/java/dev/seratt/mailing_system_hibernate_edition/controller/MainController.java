@@ -15,15 +15,15 @@ import java.util.Set;
 @Controller
 public class MainController {
     @Autowired
-    GroupService groupService;
+    private GroupService groupService;
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Autowired
-    SpamService spamService;
+    private SpamService spamService;
     @Autowired
-    CountryService countryService;
+    private CountryService countryService;
     @Autowired
-    CityService cityService;
+    private CityService cityService;
     @GetMapping("/")
     public String mainPage(){
         return "main-page";

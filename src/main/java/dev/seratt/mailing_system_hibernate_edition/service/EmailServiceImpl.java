@@ -13,7 +13,8 @@ public class EmailServiceImpl implements EmailService{
     @Autowired
     private JavaMailSender javaMailSender;
 
-    @Value("${spring.mail.username}") private String sender;
+    @Value("${spring.mail.username}")
+    private String sender;
     public boolean sendSimpleMail(EmailDetails details) {
 //        MimeMessagePreparator mimeMessagePreparator = new MimeMessagePreparator() {
 //            @Override

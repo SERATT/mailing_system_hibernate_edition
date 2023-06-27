@@ -5,15 +5,15 @@ import dev.seratt.mailing_system_hibernate_edition.entity.User;
 import java.util.List;
 
 public interface UserDao {
-    List<User> search(String searchText);
+    public List<User> search(String searchText);
 
-    List<User> findAll();
+    public List<User> findAll();
 
-    void save(User user);
+    public void save(User user);
 
-    User findById(int id);
+    public User findById(int id);
 
-    void deleteById(int id);
+    public void deleteById(int id);
 
-    User findUserByEmail(String email);
+    public User findUserByEmail(String email);
 }

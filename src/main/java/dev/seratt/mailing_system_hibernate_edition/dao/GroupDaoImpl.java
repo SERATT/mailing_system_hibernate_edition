@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class GroupDaoImpl implements GroupDao {
     @Autowired
-    EntityManager entityManager;
+    private EntityManager entityManager;
     public List<Group> search(String searchText) {
         return entityManager.createQuery("SELECT g from Group g JOIN g.users u where " +
                         "g.title like :searchText or " +

@@ -13,9 +13,9 @@ public interface GroupDao {
 
     public List<Group> findGroupsByUsersContaining(User user);
 
-    List<Group> findAll();
+    public List<Group> findAll();
 
-    void save(Group group);
+    public void save(Group group);
 
-    void deleteById(int id);
+    public void deleteById(int id);
 }

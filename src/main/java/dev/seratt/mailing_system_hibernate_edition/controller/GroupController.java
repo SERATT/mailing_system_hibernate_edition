@@ -4,6 +4,7 @@ import dev.seratt.mailing_system_hibernate_edition.entity.Group;
 import dev.seratt.mailing_system_hibernate_edition.service.GroupService;
 import dev.seratt.mailing_system_hibernate_edition.service.SpamService;
 import dev.seratt.mailing_system_hibernate_edition.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,8 +79,8 @@ public class GroupController {
     }
 
     @GetMapping("/removeUser")
-    public String removeUserFromGroup(@RequestParam("userId") int userId, @RequestParam("groupId") int groupId){
+    public String removeUserFromGroup(@RequestParam("userId") int userId, @RequestParam("groupId") int groupId, HttpServletRequest request){
         groupService.removeUserFromGroup(userService.getUser(userId), groupService.getGroup(groupId));
-        return "redirect:/groups";
+        return "redirect:" + request.getHeader("Referer");
     }
 }

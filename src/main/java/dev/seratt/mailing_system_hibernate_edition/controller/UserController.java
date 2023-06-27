@@ -29,6 +29,7 @@ public class UserController {
 
     @Autowired
     private CountryService countryService;
+
     @Autowired
     private CityService cityService;
 
@@ -45,11 +46,15 @@ public class UserController {
         model.addAttribute("countryList", countryService.getAllCountries());
         return "user-form";
     }
+
     @PostMapping(value = "/save")
     public String saveUser(@ModelAttribute("user") @Valid UserForm userForm, BindingResult bindingResult, Model model, HttpServletRequest request){
         // фильтр валидации
         if(bindingResult.hasErrors()){
             model.addAttribute("countryList", countryService.getAllCountries());
+            userForm.setCountry(countryService.findById(userForm.getCountryId()));
+            userForm.setCity(cityService.findById(userForm.getCityId()));
+            model.addAttribute("user", userForm);
             return "user-form";
         }
 
@@ -62,6 +67,9 @@ public class UserController {
             if(!userService.checkEmailUniqueness(email)){
                 model.addAttribute("error_message", "Email is not unique");
                 model.addAttribute("countryList", countryService.getAllCountries());
+                userForm.setCountry(countryService.findById(userForm.getCountryId()));
+                userForm.setCity(cityService.findById(userForm.getCityId()));
+                model.addAttribute("user", userForm);
                 return "user-form";
             }
             // if unique, create new instance and set the creation time

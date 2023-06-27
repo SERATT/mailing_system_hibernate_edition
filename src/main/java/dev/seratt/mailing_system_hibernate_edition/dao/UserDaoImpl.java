@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class UserDaoImpl implements UserDao{
     @Autowired
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     public List<User> search(String searchText) {
         return entityManager.createQuery("from User where " +

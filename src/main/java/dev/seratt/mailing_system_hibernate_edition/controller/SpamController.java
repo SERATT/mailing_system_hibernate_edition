@@ -17,11 +17,11 @@ import java.sql.Timestamp;
 @RequestMapping("/spam")
 public class SpamController {
     @Autowired
-    SpamService spamService;
+    private SpamService spamService;
     @Autowired
-    GroupService groupService;
+    private GroupService groupService;
     @Autowired
-    EmailService emailService;
+    private EmailService emailService;
 
     private int groupId;
 

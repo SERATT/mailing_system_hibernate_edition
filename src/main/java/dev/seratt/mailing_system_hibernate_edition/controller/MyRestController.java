@@ -13,9 +13,9 @@ import java.util.Set;
 @RestController
 public class MyRestController {
     @Autowired
-    CityService cityService;
+    private CityService cityService;
     @Autowired
-    CountryService countryService;
+    private CountryService countryService;
     @GetMapping("/api/country/{countryId}/getCitiesByCountry")
     public Set<City> getCitiesListByCountry(@PathVariable("countryId") int countryId) {
         return cityService.getAllCitiesByCountryId(countryId);

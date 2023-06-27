@@ -12,7 +12,7 @@ import java.util.Set;
 @Service
 public class CityServiceImpl implements CityService{
     @Autowired
-    CityRepository cityRepository;
+    private CityRepository cityRepository;
 
     public Set<City> getAllCitiesByCountryId(int countryId){
         return cityRepository.findCitiesByCountryId(countryId);

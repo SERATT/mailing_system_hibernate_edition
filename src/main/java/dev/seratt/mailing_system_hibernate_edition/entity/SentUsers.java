@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "sent_users")
+@Table(name = "spam_user_history")
 public class SentUsers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

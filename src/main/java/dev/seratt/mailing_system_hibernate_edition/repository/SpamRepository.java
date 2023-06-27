@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Set;
 
 public interface SpamRepository extends JpaRepository<Spam, Integer> {
-    Spam findById(int id);
+    public Spam findById(int id);
 
     public Set<Spam> findSpamsByLetterThemeContainingIgnoreCaseOrLetterContentContainingIgnoreCase(String theme, String content);
 

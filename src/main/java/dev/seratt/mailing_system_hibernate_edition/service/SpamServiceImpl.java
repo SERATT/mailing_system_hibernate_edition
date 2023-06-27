@@ -13,9 +13,9 @@ import java.util.Set;
 @Service
 public class SpamServiceImpl implements SpamService{
     @Autowired
-    SpamRepository spamRepository;
+    private SpamRepository spamRepository;
     @Autowired
-    EmailService emailService;
+    private EmailService emailService;
     @Override
     public List<Spam> getAllSpams() {
         return spamRepository.findAll();

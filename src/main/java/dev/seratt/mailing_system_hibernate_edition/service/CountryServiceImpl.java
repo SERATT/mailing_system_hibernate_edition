@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class CountryServiceImpl implements CountryService{
     @Autowired
-    CountryRepository countryRepository;
+    private CountryRepository countryRepository;
     @Override
     public List<Country> getAllCountries() {
         return countryRepository.findAll();
