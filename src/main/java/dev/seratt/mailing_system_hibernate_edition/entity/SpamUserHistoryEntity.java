@@ -27,5 +27,5 @@ public class SpamUserHistoryEntity {
     private SpamEntity spam;
 
     @Column(name = "status_code")
-    private char statusCode;
+    private StatusCode statusCode;
 }

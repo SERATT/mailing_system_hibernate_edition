@@ -34,7 +34,7 @@ public class SpamServiceImpl implements SpamService{
     @Override
     public void saveSpam(SpamDTO spamDTO, Long groupId) {
         SpamEntity spam = new SpamEntity();
-        spam.setStatusCode('R');
+        spam.setStatusCode(StatusCode.FAILURE);
         spam.setGroup(groupDao.findById(groupId));
         spam.setLetterTheme(spamDTO.getLetterTheme());
         spam.setLetterContent(spamDTO.getLetterContent());
@@ -53,10 +53,10 @@ public class SpamServiceImpl implements SpamService{
             SpamUserHistoryEntity spamUserHistory = new SpamUserHistoryEntity();
             spamUserHistory.setUser(user);
             spamUserHistory.setSpam(spam);
-            spamUserHistory.setStatusCode('R');
+            spamUserHistory.setStatusCode(StatusCode.FAILURE);
             if(emailService.sendSimpleMail(emailDetails)){
                 sent++;
-                spamUserHistory.setStatusCode('G');
+                spamUserHistory.setStatusCode(StatusCode.SUCCESS);
             } else {
                 not_sent++;
             }
@@ -64,14 +64,14 @@ public class SpamServiceImpl implements SpamService{
             spam.getSpamUserHistory().add(spamUserHistory);
         }
 
-        spam.setStatusCode('G');
+        spam.setStatusCode(StatusCode.SUCCESS);
 
         if(not_sent > 0){
-            spam.setStatusCode('Y');
+            spam.setStatusCode(StatusCode.PARTIAL_SUCCESS);
         }
 
         if(sent == 0){
-            spam.setStatusCode('R');
+            spam.setStatusCode(StatusCode.FAILURE);
         }
         spamRepository.save(spam);
     }
