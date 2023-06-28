@@ -38,6 +38,7 @@ public class SpamServiceImpl implements SpamService{
         spam.setGroup(groupDao.findById(groupId));
         spam.setLetterTheme(spamDTO.getLetterTheme());
         spam.setLetterContent(spamDTO.getLetterContent());
+        spam.setSendDate(spamDTO.getSendDate());
 
         String theme = spamDTO.getLetterTheme();
         String content = spamDTO.getLetterContent();
