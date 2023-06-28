@@ -18,6 +18,6 @@ public class SpamUserHistoryDTO {
     public SpamUserHistoryDTO(SpamUserHistoryEntity spamUserHistory) {
         this.id = spamUserHistory.getId();
         this.user = new UserDTO(spamUserHistory.getUser());
-        this.statusCode = spamUserHistory.getStatusCode();
+        this.statusCode = spamUserHistory.getStatusCode().getCode();
     }
 }

@@ -2,6 +2,7 @@ package dev.seratt.mailing_system_hibernate_edition.DTO;
 
 import dev.seratt.mailing_system_hibernate_edition.entity.SpamEntity;
 import dev.seratt.mailing_system_hibernate_edition.entity.SpamUserHistoryEntity;
+import dev.seratt.mailing_system_hibernate_edition.entity.StatusCode;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -41,6 +42,6 @@ public class SpamDTO {
         for (SpamUserHistoryEntity spamUserHistory : spam.getSpamUserHistory()) {
             this.spamUserHistory.add(new SpamUserHistoryDTO(spamUserHistory));
         }
-        this.statusCode = spam.getStatusCode();
+        this.statusCode = spam.getStatusCode().getCode();
     }
 }

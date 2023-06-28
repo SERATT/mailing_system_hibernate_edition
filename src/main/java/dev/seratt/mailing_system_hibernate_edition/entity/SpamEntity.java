@@ -22,7 +22,7 @@ public class SpamEntity {
     private GroupEntity group;
 
     @Column(name = "status_code")
-    private char statusCode;
+    private StatusCode statusCode;
 
     @Column(name = "send_date")
     private Timestamp sendDate;
@@ -36,7 +36,7 @@ public class SpamEntity {
     public SpamEntity() {
     }
 
-    public SpamEntity(Long id, GroupEntity group, char statusCode, Timestamp sendDate, String letterTheme, String letterContent) {
+    public SpamEntity(Long id, GroupEntity group, StatusCode statusCode, Timestamp sendDate, String letterTheme, String letterContent) {
         this.id = id;
         this.group = group;
         this.statusCode = statusCode;
@@ -61,11 +61,11 @@ public class SpamEntity {
         this.group = group;
     }
 
-    public char getStatusCode() {
+    public StatusCode getStatusCode() {
         return statusCode;
     }
 
-    public void setStatusCode(char statusCode) {
+    public void setStatusCode(StatusCode statusCode) {
         this.statusCode = statusCode;
     }
 
