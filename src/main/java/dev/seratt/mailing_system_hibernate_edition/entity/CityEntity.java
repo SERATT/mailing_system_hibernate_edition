@@ -13,11 +13,11 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "city")
-public class City {
+public class CityEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int id;
+    private Long id;
 
     @Column
     private String name;
@@ -25,7 +25,7 @@ public class City {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_id")
-    private Country country;
+    private CountryEntity country;
 
     @Override
     public String toString() {

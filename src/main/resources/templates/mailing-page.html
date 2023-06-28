@@ -53,9 +53,9 @@
                     </div>
                 </td>
                 <td>
-                    <div th:each="sentUser: ${spam.sentUsers}">
-                        <p th:text = "${sentUser.user}"></p>
-                        <span th:switch = "${sentUser.statusCode}">
+                    <div th:each="spamUserHistory: ${spam.spamUserHistory}">
+                        <p th:text = "${spamUserHistory.user}"></p>
+                        <span th:switch = "${spamUserHistory.statusCode}">
                             <div th:case="'G'" style="background-color: greenyellow">Succesful</div>
                             <div th:case="'R'" style="background-color: red">Failed</div>
                         </span>

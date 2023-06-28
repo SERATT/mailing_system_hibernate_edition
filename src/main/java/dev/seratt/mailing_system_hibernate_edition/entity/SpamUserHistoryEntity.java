@@ -12,19 +12,19 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "spam_user_history")
-public class SentUsers {
+public class SpamUserHistoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name = "spam_id")
-    private Spam spam;
+    private SpamEntity spam;
 
     @Column(name = "status_code")
     private char statusCode;

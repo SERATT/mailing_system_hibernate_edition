@@ -1,7 +1,7 @@
 package dev.seratt.mailing_system_hibernate_edition.dao;
 
-import dev.seratt.mailing_system_hibernate_edition.entity.Group;
-import dev.seratt.mailing_system_hibernate_edition.entity.User;
+import dev.seratt.mailing_system_hibernate_edition.entity.GroupEntity;
+import dev.seratt.mailing_system_hibernate_edition.entity.UserEntity;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,39 +12,39 @@ import java.util.List;
 public class GroupDaoImpl implements GroupDao {
     @Autowired
     private EntityManager entityManager;
-    public List<Group> search(String searchText) {
-        return entityManager.createQuery("SELECT g from Group g JOIN g.users u where " +
+    public List<GroupEntity> search(String searchText) {
+        return entityManager.createQuery("SELECT g from GroupEntity g JOIN g.users u where " +
                         "g.title like :searchText or " +
                         "g.description like :searchText or " +
                         "u.name like :searchText or " +
                         "u.surname like :searchText or " +
                         "u.otchestvo like :searchText or " +
-                        "u.email like :searchText", Group.class)
+                        "u.email like :searchText", GroupEntity.class)
                 .setParameter("searchText", "%"+searchText+"%")
                 .getResultList();
     }
 
-    public Group findById(int id) {
-        return entityManager.find(Group.class, id);
+    public GroupEntity findById(Long id) {
+        return entityManager.find(GroupEntity.class, id);
     }
 
-    public List<Group> findGroupsByUsersContaining(User user) {
-        return entityManager.createQuery("SELECT g from Group g JOIN g.users u WHERE u.id = :userId", Group.class)
-                .setParameter("userId", user.getId())
+    public List<GroupEntity> findGroupsByUsersContainingUserId(Long userId) {
+        return entityManager.createQuery("SELECT g from GroupEntity g JOIN g.users u WHERE u.id = :userId", GroupEntity.class)
+                .setParameter("userId", userId)
                 .getResultList();
     }
 
-    public List<Group> findAll() {
-        return entityManager.createQuery("from Group where isDeleted = false ", Group.class)
+    public List<GroupEntity> findAll() {
+        return entityManager.createQuery("from GroupEntity where isDeleted = false ", GroupEntity.class)
                 .getResultList();
     }
 
-    public void save(Group group) {
+    public void save(GroupEntity group) {
         entityManager.merge(group);
     }
 
-    public void deleteById(int id) {
-        entityManager.createQuery("UPDATE Group set isDeleted = true where id =:id")
+    public void deleteById(Long id) {
+        entityManager.createQuery("UPDATE GroupEntity set isDeleted = true where id =:id")
                 .setParameter("id", id)
                 .executeUpdate();
     }

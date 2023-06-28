@@ -1,6 +1,6 @@
 package dev.seratt.mailing_system_hibernate_edition.dao;
 
-import dev.seratt.mailing_system_hibernate_edition.entity.User;
+import dev.seratt.mailing_system_hibernate_edition.entity.UserEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,45 +13,45 @@ public class UserDaoImpl implements UserDao{
     @Autowired
     private EntityManager entityManager;
 
-    public List<User> search(String searchText) {
-        return entityManager.createQuery("from User where " +
+    public List<UserEntity> search(String searchText) {
+        return entityManager.createQuery("from UserEntity where " +
                 "name like :searchText or " +
                 "surname like :searchText or " +
                 "otchestvo like :searchText or " +
-                "email like :searchText", User.class)
+                "email like :searchText", UserEntity.class)
                 .setParameter("searchText", "%"+searchText+"%")
                 .getResultList();
     }
 
     @Override
-    public List<User> findAll() {
-        return entityManager.createQuery("from User where isDeleted = false order by id asc ", User.class).getResultList();
+    public List<UserEntity> findAll() {
+        return entityManager.createQuery("from UserEntity where isDeleted = false order by id asc ", UserEntity.class).getResultList();
     }
 
     @Override
-    public void save(User user) {
+    public void save(UserEntity user) {
         entityManager.merge(user);
     }
 
     @Override
-    public User findById(int id) {
-        return entityManager.find(User.class, id);
+    public UserEntity findById(Long id) {
+        return entityManager.find(UserEntity.class, id);
     }
 
     @Override
-    public void deleteById(int id) {
-        entityManager.createQuery("update User set isDeleted = true where id = :id")
+    public void deleteById(Long id) {
+        entityManager.createQuery("update UserEntity set isDeleted = true where id = :id")
                 .setParameter("id", id)
                 .executeUpdate();
     }
 
     @Override
-    public User findUserByEmail(String email) {
-        User user;
+    public UserEntity findUserByEmail(String email) {
+        UserEntity user;
         try {
-            Query query = entityManager.createQuery("from User where email = :email", User.class)
+            Query query = entityManager.createQuery("from UserEntity where email = :email", UserEntity.class)
                     .setParameter("email", email);
-            user = (User) query.getSingleResult();
+            user = (UserEntity) query.getSingleResult();
         } catch (Exception ex){
             return null;
         }

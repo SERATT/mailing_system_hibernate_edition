@@ -14,17 +14,17 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "country")
-public class Country {
+public class CountryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int id;
+    private Long id;
 
     @Column
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "country")
-    private Set<City> cities;
+    private Set<CityEntity> cities;
 
     @Override
     public String toString() {

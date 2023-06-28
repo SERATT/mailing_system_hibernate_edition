@@ -1,7 +1,6 @@
 package dev.seratt.mailing_system_hibernate_edition.service;
 
-import dev.seratt.mailing_system_hibernate_edition.entity.City;
-import dev.seratt.mailing_system_hibernate_edition.entity.Country;
+import dev.seratt.mailing_system_hibernate_edition.entity.CityEntity;
 import dev.seratt.mailing_system_hibernate_edition.repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +13,12 @@ public class CityServiceImpl implements CityService{
     @Autowired
     private CityRepository cityRepository;
 
-    public Set<City> getAllCitiesByCountryId(int countryId){
-        return cityRepository.findCitiesByCountryId(countryId);
+    public Set<CityEntity> getAllCityEntitiesByCountryName(String countryName){
+        return cityRepository.findCityEntitiesByCountryName(countryName);
     }
-    public City findById(int id){
-        City city = null;
+
+    public CityEntity findById(Long id){
+        CityEntity city = null;
         try{
             city = cityRepository.findById(id).get();
         } catch (NoSuchElementException ex){

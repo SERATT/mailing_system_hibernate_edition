@@ -1,20 +1,20 @@
 package dev.seratt.mailing_system_hibernate_edition.service;
 
-import dev.seratt.mailing_system_hibernate_edition.entity.Group;
-import dev.seratt.mailing_system_hibernate_edition.entity.Spam;
+import dev.seratt.mailing_system_hibernate_edition.DTO.SpamDTO;
+import dev.seratt.mailing_system_hibernate_edition.entity.SpamEntity;
 
 import java.util.List;
 import java.util.Set;
 
 public interface SpamService {
-    public List<Spam> getAllSpams();
+    public List<SpamDTO> getAllSpams();
 
-    public void saveSpam(Spam spam, Group group);
+    public void saveSpam(SpamDTO spamDTO, Long groupId);
 
-    public Spam getSpam(int id);
+    public SpamEntity getSpam(Long id);
 
-    public Set<Spam> search(String searchText);
+    public Set<SpamDTO> search(String searchText);
 
-    public void deleteSpamsByGroup(Group group);
+    public void deleteSpamsByGroupId(Long groupId);
 
 }

@@ -1,6 +1,6 @@
 package dev.seratt.mailing_system_hibernate_edition.controller;
 
-import dev.seratt.mailing_system_hibernate_edition.entity.Spam;
+import dev.seratt.mailing_system_hibernate_edition.DTO.SpamDTO;
 import dev.seratt.mailing_system_hibernate_edition.service.EmailService;
 import dev.seratt.mailing_system_hibernate_edition.service.GroupService;
 import dev.seratt.mailing_system_hibernate_edition.service.SpamService;
@@ -18,12 +18,8 @@ import java.sql.Timestamp;
 public class SpamController {
     @Autowired
     private SpamService spamService;
-    @Autowired
-    private GroupService groupService;
-    @Autowired
-    private EmailService emailService;
 
-    private int groupId;
+    private Long groupId;
 
     @GetMapping("/create")
     public String goToChooseGroup(Model model){
@@ -32,20 +28,20 @@ public class SpamController {
     }
 
     @GetMapping("/send_mail")
-    public String sendEmail(@RequestParam("groupId") int groupId, Model model){
-        Spam spam = new Spam();
-        spam.setSendDate(new Timestamp(System.currentTimeMillis()));
-        model.addAttribute("spam", spam);
+    public String sendEmail(@RequestParam("groupId") Long groupId, Model model){
+        SpamDTO spamDTO = new SpamDTO();
+        spamDTO.setSendDate(new Timestamp(System.currentTimeMillis()));
+        model.addAttribute("spam", spamDTO);
         this.groupId = groupId;
         return "spam-form";
     }
 
     @PostMapping("/save")
-    public String saveSpam(@ModelAttribute @Valid Spam spam, BindingResult bindingResult){
+    public String saveSpam(@ModelAttribute @Valid SpamDTO spamDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "spam-form";
         }
-        spamService.saveSpam(spam, groupService.getGroup(groupId));
+        spamService.saveSpam(spamDTO, groupId);
         return "redirect:/mailing";
     }
 }

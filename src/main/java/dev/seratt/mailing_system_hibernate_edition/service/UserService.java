@@ -1,20 +1,20 @@
 package dev.seratt.mailing_system_hibernate_edition.service;
 
 
-import dev.seratt.mailing_system_hibernate_edition.entity.User;
+import dev.seratt.mailing_system_hibernate_edition.DTO.UserDTO;
 
 import java.util.List;
 
 public interface UserService {
-    public List<User> getAllUsers();
+    public List<UserDTO> getAllUsers();
 
-    public void saveUser(User userEntity);
+    public void saveUser(UserDTO userDTO);
 
-    public User getUser(int id);
+    public UserDTO getUser(Long id);
 
-    public void deleteUser(int id);
+    public void deleteUser(Long id);
 
-    public List<User> search(String searchText);
+    public List<UserDTO> search(String searchText);
 
     public boolean checkEmailUniqueness(String email);
 

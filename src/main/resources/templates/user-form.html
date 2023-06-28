@@ -35,16 +35,16 @@
                 country
             </div>
             <div class="form-group">
-                <select name="countryId" class="countrySelect" onchange="updateCitiesList()">
-                    <option th:each="country : ${countryList}" th:value="${country.id}" th:text="${country.name}"
-                            th:selected="${country==user.country}"></option>
+                <select name="country" class="countrySelect" onchange="updateCitiesList()" th:value="${user.country}">
+                    <option th:each="country : ${countryList}" th:value="${country}" th:text="${country}"
+                            th:selected="${country.name==user.country}"></option>
                 </select>
             </div>
             <div>
                 city
             </div>
             <div class="form-group">
-                <select name="cityId" class="city-selection"></select>
+                <select name="city" class="city-selection" th:value="${user.city}"></select>
             </div>
             <div class="form-group">
                 email <br> <input required style="width: 100%" type="text" name="email" th:value = "${user.email}">
@@ -68,20 +68,20 @@
 
     function updateCitiesList() {
         const countrySelect = document.querySelector(".countrySelect")
-        const countryId = countrySelect.value
+        const country = countrySelect.value
         const citySelect = document.querySelector(".city-selection")
         const city = document.querySelector(".user-city").textContent
         console.log(city)
         $.ajax({
             type: "GET",
-            url: "http://localhost:8080/api/country/" + countryId + "/getCitiesByCountry",
+            url: "http://localhost:8080/api/country/" + country + "/getCitiesByCountry",
             success: function (result) {
                 while (citySelect.hasChildNodes()) {
                     citySelect.firstChild.remove()
                 }
                 let i
                 for (i of result) {
-                    $('.city-selection').append("<option class='city-selection-child' value=\"" + i.id + "\">"+i.name+"</option>")
+                    $('.city-selection').append("<option class='city-selection-child' value=\"" + i.name + "\">"+i.name+"</option>")
                 }
                 let options = document.getElementsByClassName('city-selection-child')
                 let iter = 0

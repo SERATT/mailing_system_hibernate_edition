@@ -1,5 +1,8 @@
 package dev.seratt.mailing_system_hibernate_edition.controller;
 
+import dev.seratt.mailing_system_hibernate_edition.DTO.GroupDTO;
+import dev.seratt.mailing_system_hibernate_edition.DTO.SpamDTO;
+import dev.seratt.mailing_system_hibernate_edition.DTO.UserDTO;
 import dev.seratt.mailing_system_hibernate_edition.entity.*;
 import dev.seratt.mailing_system_hibernate_edition.service.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,10 +23,7 @@ public class MainController {
     private UserService userService;
     @Autowired
     private SpamService spamService;
-    @Autowired
-    private CountryService countryService;
-    @Autowired
-    private CityService cityService;
+
     @GetMapping("/")
     public String mainPage(){
         return "main-page";
@@ -41,18 +41,18 @@ public class MainController {
         if(searchText.isEmpty()){
             return "redirect:/users";
         }
-        List<User> usersList = userService.search(searchText);
+        List<UserDTO> usersList = userService.search(searchText);
         model.addAttribute("usersList", usersList);
         return "users-page";
     }
 
     @GetMapping("/searchUsersForAdding")
     public String findUsersForAddingBySearch(@RequestParam("searchText") String searchText,
-                                             Model model, HttpServletRequest request, @RequestParam("groupId") int groupId){
+                                             Model model, HttpServletRequest request, @RequestParam("groupId") Long groupId){
         if(searchText.isEmpty()){
             return "redirect:" + request.getHeader("Referer");
         }
-        List<User> usersList = userService.search(searchText);
+        List<UserDTO> usersList = userService.search(searchText);
         model.addAttribute("usersList", usersList);
         model.addAttribute("groupId", groupId);
         return "choose-user";
@@ -64,7 +64,7 @@ public class MainController {
         if(searchText.isEmpty()){
             return "redirect:" + request.getHeader("Referer");
         }
-        List<Group> groupsList = groupService.search(searchText);
+        List<GroupDTO> groupsList = groupService.search(searchText);
         model.addAttribute("groupsList", groupsList);
         return "choose-group";
     }
@@ -87,7 +87,7 @@ public class MainController {
         if(searchText.isEmpty()){
             return "redirect:/groups";
         }
-        List<Group> groupsList = groupService.search(searchText);
+        List<GroupDTO> groupsList = groupService.search(searchText);
         model.addAttribute("groupsList", groupsList);
         return "groups-page";
     }
@@ -98,7 +98,7 @@ public class MainController {
         if(searchText.isEmpty()){
             return "redirect:/mailing";
         }
-        Set<Spam> spamsList = spamService.search(searchText);
+        Set<SpamDTO> spamsList = spamService.search(searchText);
         model.addAttribute("spamsList", spamsList);
         return "mailing-page";
     }

@@ -1,6 +1,6 @@
 package dev.seratt.mailing_system_hibernate_edition.controller;
 
-import dev.seratt.mailing_system_hibernate_edition.entity.Group;
+import dev.seratt.mailing_system_hibernate_edition.DTO.GroupDTO;
 import dev.seratt.mailing_system_hibernate_edition.service.GroupService;
 import dev.seratt.mailing_system_hibernate_edition.service.SpamService;
 import dev.seratt.mailing_system_hibernate_edition.service.UserService;
@@ -21,55 +21,48 @@ public class GroupController {
     private GroupService groupService;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private SpamService spamService;
-    @GetMapping("/save_update")
-    public String updateGroup(@RequestParam("id") int id, Model model){
-        Group group;
+    @GetMapping("/form")
+    public String updateGroup(@RequestParam("id") Long id, Model model){
+        GroupDTO groupDTO;
         if(id == 0){
-            group = new Group();
-            group.setDateOfCreation(new Timestamp(System.currentTimeMillis()));
+            groupDTO = new GroupDTO();
+            groupDTO.setDateOfCreation(new Timestamp(System.currentTimeMillis()));
         } else {
-            group = groupService.getGroup(id);
+            groupDTO = groupService.getGroup(id);
         }
-        model.addAttribute("group", group);
+        model.addAttribute("group", groupDTO);
         return "group-form";
     }
     @PostMapping("/save")
-    public String saveGroup(@ModelAttribute("group") @Valid Group group, BindingResult bindingResult){
+    public String saveGroup(@ModelAttribute("group") @Valid GroupDTO groupDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "group-form";
         }
 
-        if(group.getId() != 0){
-            group.setUsers(groupService.getGroup(group.getId()).getUsers());
-        }
-
-        groupService.saveGroup(group);
+        groupService.saveGroup(groupDTO);
         return "redirect:/groups";
     }
 
     @GetMapping("/delete")
-    public String deleteGroup(@RequestParam("id") int id){
-        spamService.deleteSpamsByGroup(groupService.getGroup(id));
+    public String deleteGroup(@RequestParam("id") Long id){
+        spamService.deleteSpamsByGroupId(id);
         groupService.deleteGroup(id);
         return "redirect:/groups";
     }
 
     @PostMapping("/createGroup")
-    public String createGroup(@RequestBody Group group){
-        groupService.saveGroup(group);
+    public String createGroup(@RequestBody GroupDTO groupDTO){
+        groupService.saveGroup(groupDTO);
         return "redirect:/groups";
     }
 
     @GetMapping("/addUser")
-    public String addUserToGroup(@RequestParam("userId") String userIdStr, @RequestParam("groupId") int groupId, Model model){
-        int userId;
+    public String addUserToGroup(@RequestParam("userId") String userIdStr, @RequestParam("groupId") Long groupId, Model model){
+        Long userId;
         try{
-            userId = Integer.parseInt(userIdStr);
-            groupService.addUserToGroup(userService.getUser(userId), groupService.getGroup(groupId));
+            userId = Long.parseLong(userIdStr);
+            groupService.addUserToGroup(userId, groupId);
         } catch (Exception ex){
             model.addAttribute("groupId", groupId);
             return "choose-user";
@@ -79,8 +72,8 @@ public class GroupController {
     }
 
     @GetMapping("/removeUser")
-    public String removeUserFromGroup(@RequestParam("userId") int userId, @RequestParam("groupId") int groupId, HttpServletRequest request){
-        groupService.removeUserFromGroup(userService.getUser(userId), groupService.getGroup(groupId));
+    public String removeUserFromGroup(@RequestParam("userId") Long userId, @RequestParam("groupId") Long groupId, HttpServletRequest request){
+        groupService.removeUserFromGroup(userId, groupId);
         return "redirect:" + request.getHeader("Referer");
     }
 }

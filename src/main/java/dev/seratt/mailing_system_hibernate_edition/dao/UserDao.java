@@ -1,19 +1,19 @@
 package dev.seratt.mailing_system_hibernate_edition.dao;
 
-import dev.seratt.mailing_system_hibernate_edition.entity.User;
+import dev.seratt.mailing_system_hibernate_edition.entity.UserEntity;
 
 import java.util.List;
 
 public interface UserDao {
-    public List<User> search(String searchText);
+    public List<UserEntity> search(String searchText);
 
-    public List<User> findAll();
+    public List<UserEntity> findAll();
 
-    public void save(User user);
+    public void save(UserEntity user);
 
-    public User findById(int id);
+    public UserEntity findById(Long id);
 
-    public void deleteById(int id);
+    public void deleteById(Long id);
 
-    public User findUserByEmail(String email);
+    public UserEntity findUserByEmail(String email);
 }

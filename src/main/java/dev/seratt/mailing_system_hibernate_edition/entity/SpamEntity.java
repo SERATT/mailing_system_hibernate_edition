@@ -1,8 +1,6 @@
 package dev.seratt.mailing_system_hibernate_edition.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -10,18 +8,18 @@ import java.util.Set;
 
 @Entity
 @Table(name = "spam")
-public class Spam {
+public class SpamEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int id;
+    private Long id;
 
     @OneToMany(mappedBy = "spam", cascade = CascadeType.ALL)
-    Set<SentUsers> sentUsers = new HashSet<>();
+    Set<SpamUserHistoryEntity> spamUserHistory = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id", referencedColumnName = "id")
-    private Group group;
+    private GroupEntity group;
 
     @Column(name = "status_code")
     private char statusCode;
@@ -29,19 +27,16 @@ public class Spam {
     @Column(name = "send_date")
     private Timestamp sendDate;
 
-    @NotBlank(message = "Theme cannot be blank")
-    @Size(min = 2, max = 100, message = "Theme must be min 2 and max 100 characters")
+
     @Column(name = "letter_theme")
     private String letterTheme;
 
-    @NotBlank
-    @Size(min = 2, message = "Content must be min 2 characters")
     @Column(name = "letter_content")
     private String letterContent;
-    public Spam() {
+    public SpamEntity() {
     }
 
-    public Spam(int id, Group group, char statusCode, Timestamp sendDate, String letterTheme, String letterContent) {
+    public SpamEntity(Long id, GroupEntity group, char statusCode, Timestamp sendDate, String letterTheme, String letterContent) {
         this.id = id;
         this.group = group;
         this.statusCode = statusCode;
@@ -50,19 +45,19 @@ public class Spam {
         this.letterContent = letterContent;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Group getGroup() {
+    public GroupEntity getGroup() {
         return group;
     }
 
-    public void setGroup(Group group) {
+    public void setGroup(GroupEntity group) {
         this.group = group;
     }
 
@@ -110,11 +105,11 @@ public class Spam {
                 '}';
     }
 
-    public Set<SentUsers> getSentUsers() {
-        return sentUsers;
+    public Set<SpamUserHistoryEntity> getSpamUserHistory() {
+        return spamUserHistory;
     }
 
-    public void setSentUsers(Set<SentUsers> sentUsers) {
-        this.sentUsers = sentUsers;
+    public void setSpamUserHistory(Set<SpamUserHistoryEntity> spamUserHistory) {
+        this.spamUserHistory = spamUserHistory;
     }
 }

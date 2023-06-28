@@ -1,26 +1,24 @@
 package dev.seratt.mailing_system_hibernate_edition.service;
 
 
-import dev.seratt.mailing_system_hibernate_edition.entity.Group;
-import dev.seratt.mailing_system_hibernate_edition.entity.User;
+import dev.seratt.mailing_system_hibernate_edition.DTO.GroupDTO;
+import dev.seratt.mailing_system_hibernate_edition.entity.GroupEntity;
 
 import java.util.List;
 
 public interface GroupService {
-    public List<Group> getAllGroups();
+    public List<GroupDTO> getAllGroups();
 
-    public void saveGroup(Group group);
+    public void saveGroup(GroupDTO groupDTO);
 
-    public Group getGroup(int id);
+    public GroupDTO getGroup(Long id);
 
-    public void deleteGroup(int id);
+    public void deleteGroup(Long id);
 
-    public List<Group> search(String searchText);
-    public void save(Group group);
+    public List<GroupDTO> search(String searchText);
+    public void save(GroupEntity group);
 
-    public List<Group> getGroupsByUsersContaining(User userEntity);
+    public void addUserToGroup(Long userId, Long groupId);
 
-    public void addUserToGroup(User userEntity, Group group);
-
-    public void removeUserFromGroup(User userEntity, Group group);
+    public void removeUserFromGroup(Long userId, Long groupId);
 }

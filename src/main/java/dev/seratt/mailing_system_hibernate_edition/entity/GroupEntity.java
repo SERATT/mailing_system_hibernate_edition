@@ -10,11 +10,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "group", schema = "public")
-public class Group {
+public class GroupEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int id;
+    private Long id;
 
     @Column(name = "title")
     @NotBlank(message = "Title can not be left blank")
@@ -40,24 +40,24 @@ public class Group {
             joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
-    private Set<User> users;
+    private Set<UserEntity> users;
 
-    public Group() {
+    public GroupEntity() {
     }
 
 
-    public Group(int id, String title, String description, Timestamp dateOfCreation) {
+    public GroupEntity(Long id, String title, String description, Timestamp dateOfCreation) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.dateOfCreation = dateOfCreation;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -85,20 +85,20 @@ public class Group {
         this.dateOfCreation = dateOfCreation;
     }
 
-    public Set<User> getUsers() {
+    public Set<UserEntity> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(Set<UserEntity> users) {
         this.users = users;
     }
 
-    public void addUser(User userEntity) {
-        users.add(userEntity);
-        userEntity.getGroups().add(this);
+    public void addUser(UserEntity user) {
+        users.add(user);
+        user.getGroups().add(this);
     }
-    public void removeUser(User userEntity) {
-        users.remove(userEntity);
-        userEntity.getGroups().remove(this);
+    public void removeUser(UserEntity user) {
+        users.remove(user);
+        user.getGroups().remove(this);
     }
 }

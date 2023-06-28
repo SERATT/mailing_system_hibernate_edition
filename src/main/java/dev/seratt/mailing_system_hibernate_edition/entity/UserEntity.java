@@ -14,11 +14,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user", schema = "public")
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int id;
+    private Long id;
 
     @Column(name = "name")
     @NotBlank(message = "Name can not be empty")
@@ -37,11 +37,11 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "country_id")
-    private Country country;
+    private CountryEntity country;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
-    private City city;
+    private CityEntity city;
 
 
     @Size(max = 100, message = "Email max 100 characters")
@@ -59,16 +59,16 @@ public class User {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "users", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private Set<Group> groups = new HashSet<>();
+    private Set<GroupEntity> groups = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<SentUsers> sentUsers;
+    private Set<SpamUserHistoryEntity> sentUsers;
 
-    public User() {
+    public UserEntity() {
     }
 
-    public User(int id, String name, String surname, String otchestvo, Country country, City city, String email, Timestamp dateOfCreation) {
+    public UserEntity(Long id, String name, String surname, String otchestvo, CountryEntity country, CityEntity city, String email, Timestamp dateOfCreation) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -79,11 +79,11 @@ public class User {
         this.dateOfCreation = dateOfCreation;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -111,19 +111,19 @@ public class User {
         this.otchestvo = otchestvo;
     }
 
-    public Country getCountry() {
+    public CountryEntity getCountry() {
         return country;
     }
 
-    public void setCountry(Country country) {
+    public void setCountry(CountryEntity country) {
         this.country = country;
     }
 
-    public City getCity() {
+    public CityEntity getCity() {
         return city;
     }
 
-    public void setCity(City city) {
+    public void setCity(CityEntity city) {
         this.city = city;
     }
 
@@ -143,11 +143,11 @@ public class User {
         this.dateOfCreation = date_of_creation;
     }
 
-    public Set<Group> getGroups() {
+    public Set<GroupEntity> getGroups() {
         return groups;
     }
 
-    public void setGroups(Set<Group> groupEntities) {
+    public void setGroups(Set<GroupEntity> groupEntities) {
         this.groups = groupEntities;
     }
 
