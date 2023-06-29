@@ -1,8 +1,6 @@
 package dev.seratt.mailing_system_hibernate_edition.controller;
 
 import dev.seratt.mailing_system_hibernate_edition.DTO.SpamDTO;
-import dev.seratt.mailing_system_hibernate_edition.service.EmailService;
-import dev.seratt.mailing_system_hibernate_edition.service.GroupService;
 import dev.seratt.mailing_system_hibernate_edition.service.SpamService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

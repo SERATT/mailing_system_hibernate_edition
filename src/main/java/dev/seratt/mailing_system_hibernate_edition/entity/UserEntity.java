@@ -63,7 +63,7 @@ public class UserEntity {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<SpamUserHistoryEntity> sentUsers;
+    private Set<SpamUserHistoryEntity> spamUserHistoryEntities;
 
     public UserEntity() {
     }

@@ -98,6 +98,7 @@ public class MainController {
         if(searchText.isEmpty()){
             return "redirect:/mailing";
         }
+      
         Set<SpamDTO> spamsList = spamService.search(searchText);
         model.addAttribute("spamsList", spamsList);
         return "mailing-page";

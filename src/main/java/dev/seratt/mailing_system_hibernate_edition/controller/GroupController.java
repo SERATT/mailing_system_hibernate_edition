@@ -27,6 +27,7 @@ public class GroupController {
         GroupDTO groupDTO;
         if(id == 0){
             groupDTO = new GroupDTO();
+            groupDTO.setId(0L);
             groupDTO.setDateOfCreation(new Timestamp(System.currentTimeMillis()));
         } else {
             groupDTO = groupService.getGroup(id);

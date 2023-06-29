@@ -9,11 +9,11 @@
         crossorigin="anonymous">
 </head>
 <body>
-<div style="width: 100vw; height: 100vh;" class="d-flex justify-content-center align-items-center">
+<div style="width: 100vw; height: 100%;" class="d-flex justify-content-center align-items-center">
     <div style="width: 80%; height: 50%;" class="d-flex flex-column justify-content-center align-items-center">
-        <form th:action="@{/searchGroupsForAdding}" method="get">
-            <input type="text" name = "searchText"/>
-            <input class="btn btn-dark" type="submit" value="search">
+        <form style="width: 100%;" th:action="@{/searchGroupsForAdding}" method="get">
+            <input style="width: 90%" type="text" name = "searchText"/>
+            <input style="width: 10%" class="btn btn-dark" type="submit" value="search">
         </form>
         <form class="form" th:action="@{/spam/send_mail}" method="get">
             <div class="form-group" th:each = "group: ${groupsList}">
