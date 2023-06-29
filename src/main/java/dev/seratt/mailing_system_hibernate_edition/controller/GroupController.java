@@ -22,6 +22,7 @@ public class GroupController {
 
     @Autowired
     private SpamService spamService;
+
     @GetMapping("/form")
     public String updateGroup(@RequestParam("id") Long id, Model model){
         GroupDTO groupDTO;
@@ -40,7 +41,6 @@ public class GroupController {
         if(bindingResult.hasErrors()){
             return "group-form";
         }
-
         groupService.saveGroup(groupDTO);
         return "redirect:/groups";
     }

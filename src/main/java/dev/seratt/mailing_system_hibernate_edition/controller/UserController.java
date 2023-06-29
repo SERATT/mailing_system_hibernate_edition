@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/save")
-    public String saveUser(@ModelAttribute("user") @Valid UserDTO userDTO, BindingResult bindingResult, Model model, HttpServletRequest request){
+    public String saveUser(@ModelAttribute("user") @Valid UserDTO userDTO, BindingResult bindingResult, Model model){
         // фильтр валидации
         if(bindingResult.hasErrors()){
             model.addAttribute("countryList", countryService.getAllCountries());
