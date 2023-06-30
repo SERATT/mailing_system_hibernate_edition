@@ -1,7 +1,6 @@
 package dev.seratt.mailing_system_hibernate_edition.dao;
 
 import dev.seratt.mailing_system_hibernate_edition.entity.GroupEntity;
-import dev.seratt.mailing_system_hibernate_edition.entity.UserEntity;
 
 import java.util.List;
 

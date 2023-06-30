@@ -1,6 +1,5 @@
 package dev.seratt.mailing_system_hibernate_edition.service;
 
-import dev.seratt.mailing_system_hibernate_edition.DTO.GroupDTO;
 import dev.seratt.mailing_system_hibernate_edition.DTO.UserDTO;
 import dev.seratt.mailing_system_hibernate_edition.dao.GroupDao;
 import dev.seratt.mailing_system_hibernate_edition.entity.GroupEntity;

@@ -11,6 +11,7 @@ import java.util.List;
 public class GroupDaoImpl implements GroupDao {
     @Autowired
     private EntityManager entityManager;
+
     public List<GroupEntity> search(String searchText) {
         return entityManager.createQuery("SELECT g from GroupEntity g JOIN g.users u where g.isDeleted = false and " +
                         "(g.title like :searchText or " +

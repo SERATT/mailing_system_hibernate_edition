@@ -15,7 +15,7 @@ public class SpamEntity {
     private Long id;
 
     @OneToMany(mappedBy = "spam", cascade = CascadeType.ALL)
-    Set<SpamUserHistoryEntity> spamUserHistory = new HashSet<>();
+    private Set<SpamUserHistoryEntity> spamUserHistory = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id", referencedColumnName = "id")
@@ -27,12 +27,12 @@ public class SpamEntity {
     @Column(name = "send_date")
     private Timestamp sendDate;
 
-
     @Column(name = "letter_theme")
     private String letterTheme;
 
     @Column(name = "letter_content")
     private String letterContent;
+
     public SpamEntity() {
     }
 

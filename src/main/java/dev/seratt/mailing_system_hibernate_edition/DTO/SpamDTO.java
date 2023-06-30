@@ -28,6 +28,7 @@ public class SpamDTO {
     @NotBlank
     @Size(min = 2, message = "Content must be min 2 characters")
     private String letterContent;
+
     private Timestamp sendDate;
     private GroupDTO group;
     private Set<SpamUserHistoryDTO> spamUserHistory = new HashSet<>();

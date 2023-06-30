@@ -29,6 +29,7 @@ public class GroupDTO {
     private String description;
 
     private Timestamp dateOfCreation;
+
     private Set<UserDTO> users;
 
     public GroupDTO(GroupEntity group) {
