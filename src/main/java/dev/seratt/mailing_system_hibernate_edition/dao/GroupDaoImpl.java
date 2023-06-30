@@ -1,7 +1,6 @@
 package dev.seratt.mailing_system_hibernate_edition.dao;
 
 import dev.seratt.mailing_system_hibernate_edition.entity.GroupEntity;
-import dev.seratt.mailing_system_hibernate_edition.entity.UserEntity;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,13 +12,13 @@ public class GroupDaoImpl implements GroupDao {
     @Autowired
     private EntityManager entityManager;
     public List<GroupEntity> search(String searchText) {
-        return entityManager.createQuery("SELECT g from GroupEntity g JOIN g.users u where " +
-                        "g.title like :searchText or " +
+        return entityManager.createQuery("SELECT g from GroupEntity g JOIN g.users u where g.isDeleted = false and " +
+                        "(g.title like :searchText or " +
                         "g.description like :searchText or " +
                         "u.name like :searchText or " +
                         "u.surname like :searchText or " +
                         "u.otchestvo like :searchText or " +
-                        "u.email like :searchText", GroupEntity.class)
+                        "u.email like :searchText)", GroupEntity.class)
                 .setParameter("searchText", "%"+searchText+"%")
                 .getResultList();
     }

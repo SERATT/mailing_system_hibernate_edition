@@ -73,12 +73,8 @@ public class SpamServiceImpl implements SpamService{
         if(sent == 0){
             spam.setStatusCode(StatusCode.FAILURE);
         }
-        spamRepository.save(spam);
-    }
 
-    @Override
-    public SpamEntity getSpam(Long id) {
-        return spamRepository.findById(id).get();
+        spamRepository.save(spam);
     }
 
     @Override
@@ -91,11 +87,4 @@ public class SpamServiceImpl implements SpamService{
         }
         return spamList;
     }
-
-    @Override
-    public void deleteSpamsByGroupId(Long groupId) {
-        spamRepository.deleteSpamsByGroupId(groupId);
-    }
-
-
 }

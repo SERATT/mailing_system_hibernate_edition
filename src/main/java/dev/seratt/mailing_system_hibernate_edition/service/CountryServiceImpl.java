@@ -21,8 +21,4 @@ public class CountryServiceImpl implements CountryService{
         }
         return countryList;
     }
-
-    public CountryEntity findById(Long id){
-        return countryRepository.findById(id).get();
-    }
 }

@@ -16,13 +16,4 @@ public class CityServiceImpl implements CityService{
     public Set<CityEntity> getAllCityEntitiesByCountryName(String countryName){
         return cityRepository.findCityEntitiesByCountryName(countryName);
     }
-
-    public CityEntity findById(Long id){
-        CityEntity city = null;
-        try{
-            city = cityRepository.findById(id).get();
-        } catch (NoSuchElementException ex){
-        }
-        return city;
-    }
 }

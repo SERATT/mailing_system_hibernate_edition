@@ -14,11 +14,11 @@ public class UserDaoImpl implements UserDao{
     private EntityManager entityManager;
 
     public List<UserEntity> search(String searchText) {
-        return entityManager.createQuery("from UserEntity where " +
-                "name like :searchText or " +
+        return entityManager.createQuery("from UserEntity where isDeleted = false and " +
+                "(name like :searchText or " +
                 "surname like :searchText or " +
                 "otchestvo like :searchText or " +
-                "email like :searchText", UserEntity.class)
+                "email like :searchText)", UserEntity.class)
                 .setParameter("searchText", "%"+searchText+"%")
                 .getResultList();
     }

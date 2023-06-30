@@ -18,7 +18,6 @@ import java.util.List;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-
     @Autowired
     private UserDao userDao;
     @Autowired
@@ -80,7 +79,6 @@ public class UserServiceImpl implements UserService {
             usersList.add(new UserDTO(user));
         }
         return usersList;
-//        return userDao.search(searchText);
     }
 
     @Override

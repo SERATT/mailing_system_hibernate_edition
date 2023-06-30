@@ -11,10 +11,5 @@ public interface SpamService {
 
     public void saveSpam(SpamDTO spamDTO, Long groupId);
 
-    public SpamEntity getSpam(Long id);
-
     public Set<SpamDTO> search(String searchText);
-
-    public void deleteSpamsByGroupId(Long groupId);
-
 }

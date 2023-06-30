@@ -20,9 +20,6 @@ public class GroupController {
     @Autowired
     private GroupService groupService;
 
-    @Autowired
-    private SpamService spamService;
-
     @GetMapping("/form")
     public String updateGroup(@RequestParam("id") Long id, Model model){
         GroupDTO groupDTO;
@@ -36,6 +33,7 @@ public class GroupController {
         model.addAttribute("group", groupDTO);
         return "group-form";
     }
+
     @PostMapping("/save")
     public String saveGroup(@ModelAttribute("group") @Valid GroupDTO groupDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
@@ -47,7 +45,6 @@ public class GroupController {
 
     @GetMapping("/delete")
     public String deleteGroup(@RequestParam("id") Long id){
-        spamService.deleteSpamsByGroupId(id);
         groupService.deleteGroup(id);
         return "redirect:/groups";
     }
@@ -64,7 +61,7 @@ public class GroupController {
         try{
             userId = Long.parseLong(userIdStr);
             groupService.addUserToGroup(userId, groupId);
-        } catch (Exception ex){
+        } catch (NumberFormatException ex){
             model.addAttribute("groupId", groupId);
             return "choose-user";
         }

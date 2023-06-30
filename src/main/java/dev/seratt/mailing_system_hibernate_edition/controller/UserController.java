@@ -2,7 +2,6 @@ package dev.seratt.mailing_system_hibernate_edition.controller;
 
 import dev.seratt.mailing_system_hibernate_edition.DTO.UserDTO;
 import dev.seratt.mailing_system_hibernate_edition.service.*;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

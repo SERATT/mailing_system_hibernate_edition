@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface CountryService {
     public List<CountryDTO> getAllCountries();
-
-    public CountryEntity findById(Long id);
 }

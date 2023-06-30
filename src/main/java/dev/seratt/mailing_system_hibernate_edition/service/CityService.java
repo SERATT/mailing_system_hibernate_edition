@@ -6,6 +6,5 @@ import java.util.Set;
 
 public interface CityService {
     public Set<CityEntity> getAllCityEntitiesByCountryName(String countryName);
-    public CityEntity findById(Long id);
 
 }
