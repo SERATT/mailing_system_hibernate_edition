@@ -14,9 +14,9 @@ import java.util.*;
 @Service
 @Transactional
 public class GroupServiceImpl implements GroupService {
-
     @Autowired
     private GroupDao groupDao;
+
     @Autowired
     private UserDao userDao;
 
@@ -39,7 +39,6 @@ public class GroupServiceImpl implements GroupService {
             group.setDateOfCreation(new Timestamp(System.currentTimeMillis()));
         } else {
             group = groupDao.findById(groupDTO.getId());
-            group.setUsers(groupDao.findById(group.getId()).getUsers());
         }
         group.setTitle(groupDTO.getTitle());
         group.setDescription(groupDTO.getDescription());

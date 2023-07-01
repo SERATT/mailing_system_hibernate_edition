@@ -16,6 +16,7 @@ public interface GroupService {
     public void deleteGroup(Long id);
 
     public List<GroupDTO> search(String searchText);
+
     public void save(GroupEntity group);
 
     public void addUserToGroup(Long userId, Long groupId);
